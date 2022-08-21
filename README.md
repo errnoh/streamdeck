@@ -17,7 +17,7 @@ improvements from <https://github.com/rafaelmartins/usbfs>.
 ## Features
 
 - Native Linux support (No CGO)
-  - Caveat: This library does not support Windows or MacOS, and will not for the conceivable future.
+  - Windows support using [~errnoh/go.hid](https://git.sr.ht/~errnoh/go.hid)
 - Supports GIFs
   - The most use~~less~~ful feature
 - Easy to use
@@ -41,11 +41,7 @@ import (
 	"image"
 	"image/gif"
 	"log"
-	"os"
-	"os/signal"
-	"path/filepath"
-
-	"golang.org/x/sys/unix"
+	"time"
 
 	"github.com/matthewpi/streamdeck"
 	"github.com/matthewpi/streamdeck/button"
@@ -58,7 +54,6 @@ var embedFs embed.FS
 func main() {
 	if err := start(context.Background()); err != nil {
 		panic(err)
-		return
 	}
 }
 
@@ -75,11 +70,11 @@ func start(ctx context.Context) error {
 	}
 	defer func(ctx context.Context, sd *streamdeck.StreamDeck) {
 		if err := sd.Close(ctx); err != nil {
-			log.Printf("an error occurred while closing the streamdeck: %v\n")
+			log.Printf("an error occurred while closing the streamdeck: %v\n", err)
 		}
 	}(ctx, sd)
 
-	if err := sd.SetBrightness(ctx, 25); err != nil {
+	if err := sd.SetBrightness(ctx, 60); err != nil {
 		return fmt.Errorf("failed to set streamdeck brightness: %w", err)
 	}
 
@@ -99,6 +94,7 @@ func start(ctx context.Context) error {
 	})
 
 	buttons.Set(1, button.NewImage(mustGetImage(sd, "spotify_play.png")))
+
 	buttons.Set(2, button.NewGIF(sd, mustGetGIF("peepoDance.gif")))
 
 	ctx3, cancel3 := context.WithCancel(ctx)
@@ -107,15 +103,13 @@ func start(ctx context.Context) error {
 		return fmt.Errorf("failed to update streamdeck buttons: %w", err)
 	}
 
-	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Interrupt, unix.SIGTERM)
-	<-ch
-	log.Println("shutting down")
+	time.Sleep(time.Second * 5)
+	sd.Device().Reset(context.TODO())
 	return nil
 }
 
 func getImage(sd *streamdeck.StreamDeck, filename string) ([]byte, error) {
-	f, err := embedFs.Open(filepath.Join(".embed", filename))
+	f, err := embedFs.Open(fmt.Sprintf(".embed/%s", filename))
 	if err != nil {
 		return nil, err
 	}
@@ -131,13 +125,12 @@ func mustGetImage(sd *streamdeck.StreamDeck, filename string) []byte {
 	img, err := getImage(sd, filename)
 	if err != nil {
 		panic(err)
-		return nil
 	}
 	return img
 }
 
 func getGIF(filename string) (*gif.GIF, error) {
-	f, err := embedFs.Open(filepath.Join(".embed", filename))
+	f, err := embedFs.Open(fmt.Sprintf(".embed/%s", filename))
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +146,6 @@ func mustGetGIF(filename string) *gif.GIF {
 	img, err := getGIF(filename)
 	if err != nil {
 		panic(err)
-		return nil
 	}
 	return img
 }
