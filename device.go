@@ -74,7 +74,7 @@ type DeviceProvider interface {
 type Device struct {
 	DeviceProvider
 
-	fd         *hid.USB
+	fd         hid.Device
 	blankImage []byte
 }
 
