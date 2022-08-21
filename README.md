@@ -17,7 +17,7 @@ improvements from <https://github.com/rafaelmartins/usbfs>.
 ## Features
 
 - Native Linux support (No CGO)
-  - Windows support using [~errnoh/go.hid](https://git.sr.ht/~errnoh/go.hid)
+  - Windows support using [~errnoh/go.hid](https://git.sr.ht/~errnoh/go.hid) (No CGO)
 - Supports GIFs
   - The most use~~less~~ful feature
 - Easy to use
