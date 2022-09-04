@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"git.sr.ht/~errnoh/go.hid/devices/hid"
+	"git.sr.ht/~errnoh/go.windows/devices/hid"
 )
 
 type USB struct {

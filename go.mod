@@ -9,8 +9,7 @@ require (
 )
 
 require (
+	git.sr.ht/~errnoh/go.windows v0.0.0-20220904161853-2415d73ea827 // indirect
 	git.sr.ht/~errnoh/hid.usage v1.3.4 // indirect
 	git.sr.ht/~errnoh/overlapped v1.0.3 // indirect
 )
-
-require git.sr.ht/~errnoh/go.hid v0.0.0-20220820104208-b6677a940f59

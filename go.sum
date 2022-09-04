@@ -1,5 +1,5 @@
-git.sr.ht/~errnoh/go.hid v0.0.0-20220820104208-b6677a940f59 h1:Ecfrltq1Jj7b0lB7S1emaxG1I8pHUrZSNBGmVk2rGCc=
-git.sr.ht/~errnoh/go.hid v0.0.0-20220820104208-b6677a940f59/go.mod h1:uFuMiQLlMrCZxAqsjY9KjVmW1M4JC14xta4C1T2ShMQ=
+git.sr.ht/~errnoh/go.windows v0.0.0-20220904161853-2415d73ea827 h1:EK3t8AiOcGXkDoyF+q2oagZiXMZycS3FkrTDVEaHZz0=
+git.sr.ht/~errnoh/go.windows v0.0.0-20220904161853-2415d73ea827/go.mod h1:mlrt/YmWA1CCda17UYwBG6eisogt+hI5e7bpyTc6y5U=
 git.sr.ht/~errnoh/hid.usage v1.3.4 h1:/41UCPk55GpBuEcQSiB1Cv3HD9oR1lvUoOD9k1jnViE=
 git.sr.ht/~errnoh/hid.usage v1.3.4/go.mod h1:JR2RHvzfICNyl38hAfRLMu5nDIpNq/jA72ywapDRsMI=
 git.sr.ht/~errnoh/overlapped v1.0.3 h1:onYYph3VNxWLZDeLE8c4rvvu7OlQzG20nYvvW+YpFUA=
